@@ -9,6 +9,7 @@ export type Product = {
   slug: string;
   description: string;
   image: string;
+  imagePosition?: string;
 };
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -76,7 +77,17 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none animate-shimmer bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         {/* Card content */}
-        <img src={product.image} alt={product.title} className="w-full h-48 object-cover" />
+        <div className="relative w-full h-48 overflow-hidden rounded-lg">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full h-full object-cover"
+            style={{
+              objectPosition: product.imagePosition || 'center',
+            }}
+          />
+        </div>
+
         <div className="p-4">
           <h3 className="text-lg font-semibold text-white">{product.title}</h3>
           <p className="text-sm text-gray-400 mt-2">{product.description}</p>

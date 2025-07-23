@@ -16,6 +16,7 @@ export default function Header() {
     { name: 'Hatteras', href: '/hatteras' },
     { name: 'Semantic-Edge', href: '/semantic-edge' },
     { name: 'Sentinel', href: '/sentinel' },
+    { name: 'Mixed Reality', href: '/mixed-reality' },
   ];
 
   return (

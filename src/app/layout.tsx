@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import { Sansation } from 'next/font/google';
 import Chatbot from './components/Chatbot';
 import PageTransition from './components/PageTransition';
+import { ViewModeProvider } from './context/ViewModeContext';
 
 const sansation = Sansation({
   weight: ['400', '700'],
@@ -21,12 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark">
       <body className={`${sansation.className} bg-zinc-950 text-white`}>
-        <Header />
-
-        {children}
-
-        <Chatbot />
-        <Footer />
+        <ViewModeProvider>
+          <Header />
+          {children}
+          <Chatbot />
+          <Footer />
+        </ViewModeProvider>
       </body>
     </html>
   );

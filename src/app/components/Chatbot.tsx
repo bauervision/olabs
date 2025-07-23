@@ -5,6 +5,17 @@ import { usePathname } from 'next/navigation';
 import { Bot, SendHorizonal, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { faqMap, FaqKey, InfoLevel } from '../lib/faqmap';
+import { useViewMode } from '../context/ViewModeContext';
+
+export function findAnswer(input: string, mode: InfoLevel): string | null {
+  const lower = input.toLowerCase().trim();
+
+  const match = Object.keys(faqMap).find((key): key is FaqKey => lower.includes(key));
+
+  return match ? faqMap[match][mode] : null;
+}
+
 function vibrate(ms: number = 15) {
   if (typeof window !== 'undefined' && navigator.vibrate) {
     navigator.vibrate(ms);
@@ -16,44 +27,98 @@ const suggestionMap: Record<string, string> = {
   '/hatteras': 'How does Hatteras improve security workflows?',
   '/semantic-edge': 'What kind of data does Semantic-Edge analyze?',
   '/sentinel': 'How can Sentinel help with threat detection?',
+  '/mixed-reality': 'What ways do you use mixed reality?',
 };
 
 export default function Chatbot() {
   const pathname = usePathname();
-  const suggestion = suggestionMap[pathname] || 'Hi! How can I help you explore oLabs?';
+  const { mode } = useViewMode();
+
+  const [suggestion, setSuggestion] = useState('');
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const sendMessage = () => {
+  const titleMap: Record<string, string> = {
+    '/': 'oLabs Assistant',
+    '/cx-edge': 'CX-Edge Assistant',
+    '/hatteras': 'Hatteras Assistant',
+    '/semantic-edge': 'Semantic-Edge Assistant',
+    '/sentinel': 'Sentinel Assistant',
+    '/mixed-reality': 'Mixed Reality Assistant',
+  };
+
+  const baseTitle = titleMap[pathname] || 'oLabs Assistant';
+
+  useEffect(() => {
+    const mapped = suggestionMap[pathname] || 'Hi! How can I help you explore oLabs?';
+    setSuggestion(mapped);
+
+    // If chatbot is open, update the input immediately with the latest suggestion
+    if (open) {
+      setInput(mapped);
+    }
+  }, [pathname, open]);
+
+  const sendMessage = async () => {
     if (!input.trim()) return;
 
     const newMessages = [...messages, { role: 'user', text: input }];
     setMessages(newMessages);
     setInput('');
 
-    setTimeout(() => {
+    // 🔍 Check hardcoded answers first
+    const cannedReply = findAnswer(input, mode);
+    if (cannedReply) {
+      setTimeout(() => {
+        setMessages((prev) => [...prev, { role: 'bot', text: cannedReply }]);
+      }, 300);
+      return;
+    }
+
+    // Otherwise → send to OpenAI
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'system',
+              content: 'You are oLabs Assistant...',
+            },
+            ...newMessages.map((m) => ({
+              role: m.role,
+              content: m.text,
+            })),
+          ],
+        }),
+      });
+
+      const data = await res.json();
+      setMessages((prev) => [...prev, { role: 'bot', text: data.text }]);
+    } catch (err) {
       setMessages((prev) => [
         ...prev,
-        {
-          role: 'bot',
-          text: 'Thanks for your message! Someone from oLabs will be in touch.',
-        },
+        { role: 'bot', text: 'Sorry, something went wrong. Please try again.' },
       ]);
-    }, 800);
+    }
   };
 
+  const hasInitializedRef = useRef(false);
+
   useEffect(() => {
-    if (open && messages.length === 0) {
-      setMessages([{ role: 'bot', text: suggestion }]);
+    if (open && !hasInitializedRef.current) {
+      setInput(suggestion); // Pre-fill input
+      hasInitializedRef.current = true;
     }
 
     if (open && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [open]);
+  }, [open, suggestion]);
 
   return (
     <AnimatePresence>
@@ -69,7 +134,8 @@ export default function Chatbot() {
           <motion.button
             onClick={() => {
               vibrate(15);
-              setOpen(true);
+              setMessages([]);
+              setOpen(true); // This will trigger the suggestion effect
             }}
             aria-label="Open Chatbot"
             className="bg-orange-600 text-white p-3 rounded-full shadow-lg hover:bg-orange-700"
@@ -95,15 +161,20 @@ export default function Chatbot() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="fixed bottom-6 right-6 w-[90vw] max-w-sm bg-zinc-900 border border-2 border-amber-600 rounded-xl shadow-xl flex flex-col overflow-hidden z-50"
+          className="fixed bottom-6 right-6 w-[90vw] max-w-sm bg-zinc-900 border-2 border-amber-600 rounded-xl shadow-xl flex flex-col overflow-hidden z-50"
         >
           <div className="flex justify-between items-center bg-zinc-800 px-4 py-2 border-b border-zinc-700">
-            <h2 className="font-semibold text-white text-lg">oLabs Assistant</h2>
+            <h2 className="font-semibold text-lg text-white">
+              {baseTitle}
+              {mode === 'advanced' && <span className="text-orange-400"> Deep Dive</span>}
+            </h2>
+
             <button
               onClick={() => {
-                vibrate(10);
-                setOpen(false);
-                setMessages([]);
+                vibrate(15);
+                setMessages([]); // Clear any old history
+                setInput(suggestion); // Set new suggestion in the input field
+                setOpen(false); // Open chatbot
               }}
               aria-label="Close Chat"
             >
