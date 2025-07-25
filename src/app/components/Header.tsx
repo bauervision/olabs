@@ -6,18 +6,11 @@ import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { products } from '../data/products';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const links = [
-    { name: 'CX-Edge', href: '/cx-edge' },
-    { name: 'Hatteras', href: '/hatteras' },
-    { name: 'Semantic-Edge', href: '/semantic-edge' },
-    { name: 'Sentinel', href: '/sentinel' },
-    { name: 'Mixed Reality', href: '/mixed-reality' },
-  ];
 
   return (
     <header className="relative bg-zinc-950 border-b border-amber-600 text-white">
@@ -43,16 +36,16 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6">
-          {links.map((link) => (
+          {products.map((link) => (
             <Link
-              key={link.href}
+              key={link.slug}
               href={link.href}
               className={clsx(
                 'hover:text-orange-400 transition-colors',
                 pathname === link.href ? 'text-orange-500 font-semibold' : 'text-zinc-300'
               )}
             >
-              {link.name}
+              {link.title}
             </Link>
           ))}
         </nav>
@@ -79,9 +72,9 @@ export default function Header() {
             className="absolute top-full right-4 z-40 w-48 bg-zinc-900 rounded-md shadow-lg border border-zinc-700"
           >
             <nav className="flex flex-col p-4 space-y-2 text-right">
-              {links.map((link) => (
+              {products.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.slug}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className={clsx(
@@ -89,13 +82,15 @@ export default function Header() {
                     pathname === link.href ? 'text-orange-500 font-semibold' : 'text-zinc-300'
                   )}
                 >
-                  {link.name}
+                  {link.title}
                 </Link>
               ))}
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="absolute bottom-0 left-0 w-full h-[3px] animated-border rounded-full" />
     </header>
   );
 }

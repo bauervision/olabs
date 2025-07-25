@@ -13,7 +13,7 @@ export function ProductTitleRow({ productName }: Props) {
 
   return (
     <div className="w-full flex justify-center py-8 relative overflow-hidden">
-      <div className="flex items-center gap-4 relative h-12">
+      <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-4 text-center sm:text-left">
         {/* Left side: Product Name */}
         <div className="relative w-max">
           <AnimatePresence mode="wait">

@@ -16,6 +16,9 @@ const sansation = Sansation({
 export const metadata = {
   title: 'oLabs',
   description: 'Product showcase site for oLabs',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

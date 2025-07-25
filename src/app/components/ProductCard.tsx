@@ -33,11 +33,23 @@ export default function ProductCard({ product }: { product: Product }) {
     damping: 18,
   });
 
-  // Swivel interaction
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [0, 1], [10, -10]), { stiffness: 100, damping: 10 });
-  const rotateY = useSpring(useTransform(x, [0, 1], [-10, 10]), { stiffness: 100, damping: 10 });
+  // Initial tilt based on direction
+  const initialX = 0.5;
+  const initialY = 0.5;
+
+  // Initial neutral position
+  const x = useMotionValue(0.5);
+  const y = useMotionValue(0.5);
+
+  // Springs
+  const rotateX = useSpring(useTransform(y, [0, 1], [10, -10]), {
+    stiffness: 100,
+    damping: 10,
+  });
+  const rotateY = useSpring(useTransform(x, [0, 1], [-10, 10]), {
+    stiffness: 100,
+    damping: 10,
+  });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const bounds = ref.current?.getBoundingClientRect();
@@ -51,8 +63,8 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   const handleMouseLeave = () => {
-    x.set(0.5);
-    y.set(0.5);
+    x.set(initialX);
+    y.set(initialY);
   };
 
   return (
@@ -88,8 +100,16 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         </div>
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-white">{product.title}</h3>
+        <div className="p-4 ">
+          <div className="text-3xl">
+            <span
+              className="relative z-10 inset-0 text-orange-400 opacity-0 group-hover:opacity-100 animate-glitch pointer-events-none"
+              aria-hidden="true"
+            >
+              {product.title}
+            </span>
+          </div>
+
           <p className="text-sm text-gray-400 mt-2">{product.description}</p>
         </div>
       </motion.div>

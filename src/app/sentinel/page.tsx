@@ -11,7 +11,7 @@ export default function SentinelPage() {
   return (
     <PageFade>
       <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" />
-      <main className=" bg-zinc-900 text-white p-8 pt-8 flex flex-col justify-center items-center text-center">
+      <main className=" bg-zinc-900 text-white py-8  flex flex-col justify-center items-center text-center">
         <ProductTitleRow productName="Sentinel" />
         {mode === 'basic' && (
           <section className="mb-6">
