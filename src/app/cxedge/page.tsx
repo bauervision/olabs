@@ -83,18 +83,6 @@ export default function CXEdgePage() {
               </h2>
 
               <FeatureRow
-                // reverse
-                // image={
-                //   <MaskedImage
-                //     src="/images/devices.png"
-                //     alt="Tactical hardware"
-                //     circle
-                //     fill={false}
-                //     zoom={2.75}
-                //     positionX="center"
-                //     positionY="80%"
-                //   />
-                // }
                 quoteText="Real Time Critical Data"
                 bodySegments={[
                   'CXEdge allows end users to ingest, store, transform, and disseminate real time insights from tactical AI and Machine Learning (ML) processes to Android Team Awareness Kits (ATAK), Integrated Visual Augmentation Systems (IVAS),Enhanced Night Vision Goggle Binoculars (ENVG-B), and other devices.',
@@ -110,25 +98,39 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-700/80"
               contentPosition="center"
               background="/images/world.png"
+            />
+
+            <MaskedSection
+              topLeftAngle={40}
+              bottomLeftAngle={40}
+              bgColor="bg-zinc-700/80"
+              contentPosition="center"
             >
               <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
                 Store and Disseminate Products From The Tactical Edge
               </h2>
-
-              <FeatureRow
-                reverse
-                bodySegments={[
-                  'Natural Language Processing (NLP) and Optical Character Recognition (OCR) on captured enemy material',
-                  'Aided Target Recognition (AiTR)',
-                  '3D geospatial analysis',
-                ]}
-              />
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <QuoteBubble
+                  text="Aided Target Recognition (AiTR)"
+                  borderColor="border-cyan-400"
+                  fillColor="bg-cyan-900/80"
+                />{' '}
+                <QuoteBubble
+                  text="Natural Language Processing (NLP) and Optical Character Recognition (OCR) on captured enemy material"
+                  borderColor="border-cyan-400"
+                  fillColor="bg-cyan-900/80"
+                />
+                <QuoteBubble
+                  text="3D geospatial analysis"
+                  borderColor="border-cyan-400"
+                  fillColor="bg-cyan-900/80"
+                />
+              </div>
             </MaskedSection>
-
             {/* Real Users in Mind */}
             <MaskedSection
-              topLeftAngle={40}
-              bottomLeftAngle={40}
+              topRightAngle={40}
+              bottomRightAngle={40}
               bgColor="bg-gradient-to-br from-zinc-500/60 via-orange-400/30 to-orange-900/80"
               contentPosition="center"
             >
@@ -140,13 +142,13 @@ export default function CXEdgePage() {
                 // reverse
                 image={
                   <MaskedImage
-                    src="/images/devices.png"
+                    src="/images/people.png"
                     alt="Tactical hardware"
-                    circle
+                    // circle
                     fill={false}
-                    zoom={2.75}
-                    positionX="bottom"
-                    //positionY="80%"
+                    zoom={1.55}
+                    positionX="center"
+                    positionY="50%"
                   />
                 }
                 // quoteText="Real Time Critical Data"

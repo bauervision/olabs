@@ -12,7 +12,8 @@ type Props = {
   bgColor?: string;
   background?: string; // new
   contentPosition?: 'left' | 'center' | 'right';
-  children: React.ReactNode;
+  children?: React.ReactNode | null;
+  opacity?: number | string;
 };
 
 export default function MaskedSection({
@@ -24,6 +25,7 @@ export default function MaskedSection({
   background,
   contentPosition = 'center',
   children,
+  opacity = 1,
 }: Props) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
@@ -33,6 +35,13 @@ export default function MaskedSection({
     center: 'items-center text-center',
     right: 'items-end text-right',
   };
+
+  const parsedOpacity =
+    typeof opacity === 'string' && opacity.includes('%')
+      ? parseFloat(opacity) / 100
+      : typeof opacity === 'number'
+        ? opacity
+        : 1;
 
   return (
     <section
@@ -53,6 +62,7 @@ export default function MaskedSection({
         backgroundImage: background ? `url(${background})` : undefined,
         backgroundSize: background ? 'cover' : undefined,
         backgroundPosition: background ? 'center' : undefined,
+        opacity: parsedOpacity,
       }}
     >
       <motion.div
@@ -61,7 +71,7 @@ export default function MaskedSection({
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="w-full max-w-screen-xl px-4 sm:px-8 lg:px-12 xl:px-16"
       >
-        {children}
+        {children && children}
       </motion.div>
     </section>
   );

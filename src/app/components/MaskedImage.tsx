@@ -8,6 +8,7 @@ type MaskedImageProps = {
   zoom?: number; // scale factor (1.0 = normal, 2.0 = 200%)
   positionX?: string; // e.g. 'center', '20%', 'left'
   positionY?: string; // e.g. 'center', '80%', 'top'
+  opacity?: number | string; // NEW
   className?: string;
 };
 
@@ -19,6 +20,7 @@ export default function MaskedImage({
   zoom = 2.0,
   positionX = 'center',
   positionY = '100%',
+  opacity = 1,
   className = '',
 }: MaskedImageProps) {
   const translate = {
@@ -31,6 +33,14 @@ export default function MaskedImage({
 
   const translateX = translate[positionX as keyof typeof translate] || '-translate-x-1/2';
   const translateY = translate[positionY as keyof typeof translate] || '-translate-y-1/2';
+
+  // Convert '45%' → 0.45, or use number directly
+  const parsedOpacity =
+    typeof opacity === 'string' && opacity.includes('%')
+      ? parseFloat(opacity) / 100
+      : typeof opacity === 'number'
+        ? opacity
+        : 1;
 
   return (
     <div
@@ -54,6 +64,7 @@ export default function MaskedImage({
           height: `${zoom * 100}%`,
           left: positionX,
           top: positionY,
+          opacity: parsedOpacity,
         }}
       />
     </div>
