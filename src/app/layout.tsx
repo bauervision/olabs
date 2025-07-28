@@ -6,6 +6,7 @@ import { Sansation } from 'next/font/google';
 import Chatbot from './components/Chatbot';
 import PageTransition from './components/PageTransition';
 import { ViewModeProvider } from './context/ViewModeContext';
+import Head from 'next/head';
 
 const sansation = Sansation({
   weight: ['400', '700'],
@@ -24,6 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
+      <Head>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
       <body className={`${sansation.className} bg-zinc-950 text-white`}>
         <ViewModeProvider>
           <Header />
