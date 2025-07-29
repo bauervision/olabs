@@ -8,8 +8,9 @@ type FeatureRowProps = {
   bodySegments?: string[];
   image?: React.ReactNode;
   quoteText?: string;
+  quotePopupContent?: React.ReactNode; // NEW
   reverse?: boolean;
-  children?: React.ReactNode; // NEW
+  children?: React.ReactNode;
 };
 
 export default function FeatureRow({
@@ -17,6 +18,7 @@ export default function FeatureRow({
   bodySegments,
   image,
   quoteText,
+  quotePopupContent,
   reverse = false,
   children,
 }: FeatureRowProps) {
@@ -54,10 +56,15 @@ export default function FeatureRow({
         ) : null}
       </div>
 
-      {/* Right Side: Quote (if not using children) */}
+      {/* Right Side: QuoteBubble if no children */}
       {!children && hasQuote && (
         <div className="w-full sm:w-1/4 flex justify-center">
-          <QuoteBubble text={quoteText} borderColor="border-cyan-400" fillColor="bg-cyan-900/80" />
+          <QuoteBubble
+            text={quoteText}
+            borderColor="border-cyan-400"
+            fillColor="bg-cyan-900/80"
+            popupContent={quotePopupContent} // PASS DOWN
+          />
         </div>
       )}
     </div>

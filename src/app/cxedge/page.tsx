@@ -26,7 +26,7 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-800/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-4 animate-glitch">
+              <h2 className="text-4xl font-bold text-orange-500 mb-4 animate-glitch">
                 360° Situational Awareness at the Tactical Edge
               </h2>
               <FeatureRow
@@ -35,6 +35,14 @@ export default function CXEdgePage() {
                   are weak and access to the latest cloud computing technology is limited, units
                   struggle to move data and quickly analyze threats. The solution? CXEdge™"
                 quoteText="Units struggle to move data and quickly analyze threats"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Units Struggle
+                    </h2>
+                    <p>This dialog gives more info when users click the quote.</p>
+                  </div>
+                }
               />
             </MaskedSection>
 
@@ -45,7 +53,7 @@ export default function CXEdgePage() {
               bgColor="bg-gradient-to-br from-orange-500/60 via-orange-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
                 Simple but Robust
               </h2>
 
@@ -55,12 +63,20 @@ export default function CXEdgePage() {
                   <MaskedImage
                     src="/images/devices.png"
                     alt="Tactical hardware"
-                    circle
                     fill={false}
-                    zoom={2.75}
+                    circle
+                    zoom={2.55}
                     positionX="bottom"
-                    //positionY="80%"
+                    positionY="20%"
                   />
+                }
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Collect, Analyze, and Distribute...
+                    </h2>
+                    <p>This dialog gives more info when users click the quote.</p>
+                  </div>
                 }
                 quoteText="Collect, analyze, and distribute mission critical data in real time on handheld devices"
                 bodySegments={[
@@ -78,12 +94,20 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-600/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
                 Give Your Team The Edge
               </h2>
 
               <FeatureRow
                 quoteText="Real Time Critical Data"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Real Time Critical Data
+                    </h2>
+                    <p>This dialog gives more info when users click the quote.</p>
+                  </div>
+                }
                 bodySegments={[
                   'CXEdge allows end users to ingest, store, transform, and disseminate real time insights from tactical AI and Machine Learning (ML) processes to Android Team Awareness Kits (ATAK), Integrated Visual Augmentation Systems (IVAS),Enhanced Night Vision Goggle Binoculars (ENVG-B), and other devices.',
                   'A user centric AI platform, CXEdge enables real time aggregation of information across battlefield sensors—everything from handheld devices to Group 5 UAVs, even in delayed/disconnected, intermittently connected, low bandwidth (DDIL)environments. It delivers relevant information to the end user when and where they need it, no cloud necessary.',
@@ -114,16 +138,40 @@ export default function CXEdgePage() {
                   text="Aided Target Recognition (AiTR)"
                   borderColor="border-cyan-400"
                   fillColor="bg-cyan-900/80"
-                />{' '}
+                  popupContent={
+                    <div>
+                      <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                        Aided Target Recognition
+                      </h2>
+                      <p>This popup provides context for the quote.</p>
+                    </div>
+                  }
+                />
                 <QuoteBubble
                   text="Natural Language Processing (NLP) and Optical Character Recognition (OCR) on captured enemy material"
                   borderColor="border-cyan-400"
                   fillColor="bg-cyan-900/80"
+                  popupContent={
+                    <div>
+                      <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                        NLP and OCR
+                      </h2>
+                      <p>This popup provides context for the quote.</p>
+                    </div>
+                  }
                 />
                 <QuoteBubble
-                  text="3D geospatial analysis"
+                  text="3D Geospatial Analysis"
                   borderColor="border-cyan-400"
                   fillColor="bg-cyan-900/80"
+                  popupContent={
+                    <div>
+                      <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch animate-glitch">
+                        3D Geospatial Analysis
+                      </h2>
+                      <p>This popup provides context for the quote.</p>
+                    </div>
+                  }
                 />
               </div>
             </MaskedSection>

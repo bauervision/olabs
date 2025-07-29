@@ -2,17 +2,9 @@
 import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Sansation } from 'next/font/google';
 import Chatbot from './components/Chatbot';
-import PageTransition from './components/PageTransition';
 import { ViewModeProvider } from './context/ViewModeContext';
 import Head from 'next/head';
-
-const sansation = Sansation({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export const metadata = {
   title: 'oLabs',
@@ -27,8 +19,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="dark">
       <Head>
         <link rel="icon" href="/favicon.png" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sansation&display=swap"
+          rel="stylesheet"
+        />
       </Head>
-      <body className={`${sansation.className} bg-zinc-950 text-white`}>
+      <body className={` bg-zinc-950 text-white`}>
         <ViewModeProvider>
           <Header />
           {children}

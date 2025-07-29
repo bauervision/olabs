@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "octo-olabs",
+    "site": "ibm-olabs",
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
