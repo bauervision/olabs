@@ -33,7 +33,7 @@ export default function Header() {
         transition={{ duration: 0.4, ease: 'easeInOut' }}
         className={clsx(
           'sticky top-0 z-50 transition-all duration-300 h-[60px] overflow-x-clip', // <- prevent layout bleed
-          'bg-zinc-950 border-b border-amber-600 text-white py-4',
+          'bg-zinc-950 border-b border-blue-600 text-white py-4',
           scrolled ? ' shadow-md rounded-l-full' : ' rounded-none'
         )}
       >
@@ -46,7 +46,7 @@ export default function Header() {
           >
             <Link
               href="/"
-              className="relative font-extrabold text-2xl sm:text-3xl tracking-tight font-sansation group text-orange-500"
+              className="relative font-extrabold text-2xl sm:text-3xl tracking-tight font-sansation group text-blue-500"
             >
               <motion.span
                 animate={{ scale: scrolled ? 0.85 : 1 }}
@@ -56,7 +56,7 @@ export default function Header() {
                 oLabs
               </motion.span>
               <span
-                className="absolute inset-0 text-orange-500 blur-sm opacity-30 group-hover:opacity-60 animate-glow"
+                className="absolute inset-0 text-blue-500 blur-sm opacity-30 group-hover:opacity-60 animate-glow"
                 aria-hidden="true"
               >
                 oLabs
@@ -71,8 +71,8 @@ export default function Header() {
                 key={link.slug}
                 href={link.href}
                 className={clsx(
-                  'hover:text-orange-400 transition-colors',
-                  pathname === link.href ? 'text-orange-500 font-semibold' : 'text-zinc-300'
+                  'hover:text-blue-400 transition-colors',
+                  pathname === link.href ? 'text-blue-500 font-semibold' : 'text-zinc-300'
                 )}
               >
                 {link.title}
@@ -91,7 +91,7 @@ export default function Header() {
       <div className="fixed top-4 right-4 z-50 md:hidden">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-zinc-300 hover:text-orange-500 transition"
+          className="text-zinc-300 hover:text-blue-500 transition"
           aria-label="Toggle menu"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -117,7 +117,7 @@ export default function Header() {
                   onClick={() => setMenuOpen(false)}
                   className={clsx(
                     'block py-2 text-lg',
-                    pathname === link.href ? 'text-orange-500 font-semibold' : 'text-zinc-300'
+                    pathname === link.href ? 'text-blue-500 font-semibold' : 'text-zinc-300'
                   )}
                 >
                   {link.title}

@@ -15,7 +15,7 @@ export default function SemanticEdgePage() {
 
   return (
     <PageFade>
-      <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" />
+      {/* <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" /> */}
       <main className=" bg-zinc-900 text-white py-8  flex flex-col justify-center items-center text-center">
         <ProductTitleRow productName="Semantic Edge" />
         {mode === 'basic' && (
@@ -26,7 +26,7 @@ export default function SemanticEdgePage() {
               bgColor="bg-gradient-to-br from-zinc-900/60 via-zinc-400/30 to-zinc-700/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-4 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
                 AI Powered Battlefield Assistant
               </h2>
               <p className="py-4">
@@ -89,10 +89,10 @@ export default function SemanticEdgePage() {
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
-              bgColor="bg-gradient-to-br from-orange-500/60 via-orange-400/30 to-zinc-900/80"
+              bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Data Overload
               </h2>
 
@@ -135,7 +135,7 @@ export default function SemanticEdgePage() {
               bgColor="bg-gradient-to-br from-zinc-900/90 via-zinc-400/10 to-zinc-900/90"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Current Faults of Generative Systems at the Edge
               </h2>
               <p className="py-4">
@@ -224,7 +224,7 @@ export default function SemanticEdgePage() {
               bgColor="bg-gradient-to-br from-zinc-500/60 via-zinc-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Semantic Edge Solution
               </h2>
 
@@ -254,10 +254,10 @@ export default function SemanticEdgePage() {
             <MaskedSection
               topLeftAngle={40}
               bottomLeftAngle={40}
-              bgColor="bg-gradient-to-br from-orange-500/60 via-orange-400/30 to-zinc-900/80"
+              bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-4 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
                 Core Capabilities
               </h2>
 
@@ -341,7 +341,7 @@ export default function SemanticEdgePage() {
               bgColor="bg-gradient-to-br from-zinc-700/60 via-zinc-900/30 to-zinc-800/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Full Spectrum Intelligence
               </h2>
 

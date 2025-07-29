@@ -41,7 +41,7 @@ export const products = [
     slug: 'echonet',
     description: 'A sound-based systems for locating targets in real time',
     image: '/images/echonet.png',
-    imagePosition: 'center 65%',
+    imagePosition: 'center 45%',
     href: '/echonet',
   },
   {

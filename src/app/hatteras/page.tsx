@@ -13,7 +13,7 @@ export default function HatterasPage() {
   const { mode } = useViewMode();
   return (
     <PageFade>
-      <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" />
+      {/* <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" /> */}
       <main className=" bg-zinc-900 text-white py-8  flex flex-col justify-center items-center text-center">
         <ProductTitleRow productName="Hatteras" logoUrl="/images/HatterasLogo.png" />
 
@@ -25,7 +25,7 @@ export default function HatterasPage() {
               bgColor="bg-zinc-800/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-4 animate-glitch">
+              <h2 className="text-3xl font-bold text-blue-500 mb-4 animate-glitch">
                 MLOps Platform Deployed and Used at the Edge
               </h2>
               <FeatureRow
@@ -51,10 +51,10 @@ export default function HatterasPage() {
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
-              bgColor="bg-gradient-to-br from-orange-500/60 via-orange-400/30 to-zinc-900/80"
+              bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-3xl font-bold text-blue-500 mb-6 animate-glitch">
                 Develop, Deploy, and Maintain Models
               </h2>
 
@@ -102,7 +102,7 @@ export default function HatterasPage() {
               bgColor="bg-zinc-600/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-3xl font-bold text-blue-500 mb-6 animate-glitch">
                 Operational Overview
               </h2>
 

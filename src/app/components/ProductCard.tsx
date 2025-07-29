@@ -83,7 +83,7 @@ export default function ProductCard({ product }: { product: Product }) {
         className="group relative bg-zinc-800/60 border-4 border-zinc-800 rounded-xl overflow-hidden shadow-md backdrop-blur-sm transition-transform"
       >
         {/* Glow border */}
-        <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-orange-500 group-hover:shadow-[0_0_25px_rgba(255,125,0,0.5)] z-10 pointer-events-none transition-all duration-300" />
+        <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-blue-500 group-hover:shadow-[0_0_25px_rgba(255,125,0,0.5)] z-10 pointer-events-none transition-all duration-300" />
 
         {/* Shimmer effect */}
         <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none animate-shimmer bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -103,7 +103,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="p-4 ">
           <div className="text-3xl">
             <span
-              className="relative z-10 inset-0 text-orange-400 opacity-0 group-hover:opacity-100 animate-glitch pointer-events-none"
+              className="relative z-10 inset-0 text-blue-400 opacity-0 group-hover:opacity-100 animate-glitch pointer-events-none"
               aria-hidden="true"
             >
               {product.title}

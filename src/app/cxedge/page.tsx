@@ -14,7 +14,7 @@ export default function CXEdgePage() {
   const { mode } = useViewMode();
   return (
     <PageFade>
-      <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" />
+      {/* <ProductHeaderBar techDocUrl="/docs/cx-edge-tech.pdf" /> */}
       <main className=" bg-zinc-900 text-white py-8   flex flex-col justify-center items-center text-center">
         <ProductTitleRow productName="CXEdge™" />
 
@@ -26,7 +26,7 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-800/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-4 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
                 360° Situational Awareness at the Tactical Edge
               </h2>
               <FeatureRow
@@ -50,10 +50,10 @@ export default function CXEdgePage() {
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
-              bgColor="bg-gradient-to-br from-orange-500/60 via-orange-400/30 to-zinc-900/80"
+              bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Simple but Robust
               </h2>
 
@@ -94,7 +94,7 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-600/80"
               contentPosition="center"
             >
-              <h2 className="text-4xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
                 Give Your Team The Edge
               </h2>
 
@@ -130,7 +130,7 @@ export default function CXEdgePage() {
               bgColor="bg-zinc-700/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-3xl font-bold text-blue-500 mb-6 animate-glitch">
                 Store and Disseminate Products From The Tactical Edge
               </h2>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -179,10 +179,10 @@ export default function CXEdgePage() {
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
-              bgColor="bg-gradient-to-br from-zinc-500/60 via-orange-400/30 to-orange-900/80"
+              bgColor="bg-gradient-to-br from-zinc-500/60 via-blue-400/30 to-blue-900/80"
               contentPosition="center"
             >
-              <h2 className="text-3xl font-bold text-orange-500 mb-6 animate-glitch">
+              <h2 className="text-3xl font-bold text-blue-500 mb-6 animate-glitch">
                 Real Users in Mind
               </h2>
 
@@ -209,7 +209,7 @@ export default function CXEdgePage() {
         )}
         {mode === 'advanced' && (
           <MaskedSection topLeftAngle={-60} bgColor="bg-zinc-800/80">
-            <h2 className="text-3xl font-bold text-orange-500">AI Integration</h2>
+            <h2 className="text-3xl font-bold text-blue-500">AI Integration</h2>
             <p className="text-white mt-2 max-w-xl">
               Seamless LLM and ML model integration for enterprise platforms.
             </p>

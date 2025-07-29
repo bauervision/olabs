@@ -43,7 +43,7 @@ export function ProductTitleRow({ productName, logoUrl }: Props) {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -150, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl sm:text-3xl font-bold text-cyan-400 whitespace-nowrap"
+                className="text-3xl sm:text-5xl font-bold text-cyan-400 whitespace-nowrap"
               >
                 {productName}
               </motion.h1>
@@ -60,7 +60,7 @@ export function ProductTitleRow({ productName, logoUrl }: Props) {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 150, opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-xl sm:text-2xl font-semibold text-orange-400 whitespace-nowrap"
+              className="text-xl sm:text-3xl font-semibold text-blue-800 whitespace-nowrap"
             >
               {getLabel()}
             </motion.h2>

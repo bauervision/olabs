@@ -138,7 +138,7 @@ export default function Chatbot() {
               setOpen(true); // This will trigger the suggestion effect
             }}
             aria-label="Open Chatbot"
-            className="bg-orange-600 text-white p-3 rounded-full shadow-lg hover:bg-orange-700"
+            className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
             animate={{
               x: [0, 2, -2, 1, -1, 0],
               y: [0, -1, 1, -2, 2, 0],
@@ -161,12 +161,12 @@ export default function Chatbot() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="fixed bottom-6 right-6 w-[90vw] max-w-sm bg-zinc-900 border-2 border-amber-600 rounded-xl shadow-xl flex flex-col overflow-hidden z-50"
+          className="fixed bottom-6 right-6 w-[90vw] max-w-sm bg-zinc-900 border-2 border-blue-600 rounded-xl shadow-xl flex flex-col overflow-hidden z-50"
         >
           <div className="flex justify-between items-center bg-zinc-800 px-4 py-2 border-b border-zinc-700">
             <h2 className="font-semibold text-lg text-white">
               {baseTitle}
-              {mode === 'advanced' && <span className="text-orange-400"> Deep Dive</span>}
+              {mode === 'advanced' && <span className="text-blue-400"> Deep Dive</span>}
             </h2>
 
             <button
@@ -178,7 +178,7 @@ export default function Chatbot() {
               }}
               aria-label="Close Chat"
             >
-              <X size={20} className="text-gray-400 hover:text-orange-500" />
+              <X size={20} className="text-gray-400 hover:text-blue-500" />
             </button>
           </div>
 
@@ -189,7 +189,7 @@ export default function Chatbot() {
                 className={`p-2 rounded-lg max-w-[85%] ${
                   msg.role === 'user'
                     ? 'bg-zinc-700 text-right ml-auto text-white'
-                    : 'bg-orange-900 text-left mr-auto text-orange-100'
+                    : 'bg-blue-900 text-left mr-auto text-blue-100'
                 }`}
               >
                 {msg.text}
@@ -209,7 +209,7 @@ export default function Chatbot() {
             />
             <button
               onClick={sendMessage}
-              className="px-4 bg-orange-600 text-white hover:bg-orange-700 transition"
+              className="px-4 bg-blue-600 text-white hover:bg-blue-700 transition"
               aria-label="Send Message"
             >
               <SendHorizonal size={20} />
