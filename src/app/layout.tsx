@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </Head>
-      <body className={` bg-zinc-950 text-white`}>
+      <body className={` bg-zinc-950 text-white overflow-x-hidden`}>
         <ViewModeProvider>
           <Header />
           {children}
