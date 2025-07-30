@@ -21,6 +21,48 @@ export default function SemanticEdgePage() {
         {mode === 'basic' && (
           <>
             <MaskedSection
+              topRightAngle={40}
+              bottomRightAngle={40}
+              bgColor="bg-gradient-to-br from-zinc-900/90 via-zinc-900/40 to-zinc-700/90"
+              contentPosition="center"
+            >
+              <p className="pb-2">
+                The AI landscape today is saturated with actors and tremendous amount of open-source
+                tooling.
+              </p>
+              <p className="py-2">
+                Therefore, we set ourselves apart through{' '}
+                <span className="font-bold text-blue-600">
+                  original innovation, strategic integration, and rigorous research
+                </span>
+                . Most tools on the market are nothing more than a collection of existing tools
+                bundled into a single package with a nice user interface and new branding.
+              </p>
+
+              <p className="py-2">
+                We don't do that. We go further. Our solutions offers novel capabilities that do not
+                yet exist not just in the open-source ecosystem but anywhere.
+              </p>
+              <p className="py-2">
+                At the same time, we aggressively incorporate the strongest elements from open
+                source tools where our testing or other research has demonstrated their value.
+              </p>
+              <p className="py-2">
+                What truly sets us apart, however, is our{' '}
+                <span className="font-bold text-blue-600">research-driven design methodology</span>.
+                Every capability is developed not just for functionality, but for fit, purpose and
+                impact. This methodological approach ensures that our system is intuitive to the
+                user without compromising on performance.{' '}
+              </p>
+              <p className="pb-4">
+                Moreover, we aim to{' '}
+                <span className="font-bold text-blue-600">deploy everywhere</span>. Our service scan
+                run entirely offline and in a wide variety of platforms including embedded devices,
+                laptops, mobile workstations, private datacenters, or even the cloud.
+              </p>
+            </MaskedSection>
+
+            <MaskedSection
               topLeftAngle={40}
               bottomLeftAngle={40}
               bgColor="bg-gradient-to-br from-zinc-900/60 via-zinc-400/30 to-zinc-700/80"
@@ -29,10 +71,6 @@ export default function SemanticEdgePage() {
               <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
                 AI Powered Battlefield Assistant
               </h2>
-              <p className="py-4">
-                Brings real-time intelligence and decision support directly to the
-                warfighter--wherever they are!
-              </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-8">
                 <QuoteBubble
                   text="Resilient"

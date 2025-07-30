@@ -4,17 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Bot, SendHorizonal, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown'; // at top of file
 
-import { faqMap, FaqKey, InfoLevel } from '../lib/faqmap';
+import { faqMap, FaqKey, generalFaqKeys, pageSpecificFaqMap } from '../lib/faqmap';
 import { useViewMode } from '../context/ViewModeContext';
-
-export function findAnswer(input: string, mode: InfoLevel): string | null {
-  const lower = input.toLowerCase().trim();
-
-  const match = Object.keys(faqMap).find((key): key is FaqKey => lower.includes(key));
-
-  return match ? faqMap[match][mode] : null;
-}
 
 function vibrate(ms: number = 15) {
   if (typeof window !== 'undefined' && navigator.vibrate) {
@@ -22,45 +15,40 @@ function vibrate(ms: number = 15) {
   }
 }
 
-const suggestionMap: Record<string, string> = {
-  '/cx-edge': 'What does CX-Edge do for our customers?',
-  '/hatteras': 'How does Hatteras improve security workflows?',
-  '/semantic-edge': 'What kind of data does Semantic-Edge analyze?',
-  '/sentinel': 'How can Sentinel help with threat detection?',
-  '/mixed-reality': 'What ways do you use mixed reality?',
-};
+export function findAnswer(input: string): string | null {
+  const lower = input.toLowerCase().trim();
+
+  // Normalize keys for matching
+  const match = Object.entries(faqMap).find(([key]) => lower.includes(key.toLowerCase()));
+
+  return match ? match[1].basic : null;
+}
 
 export default function Chatbot() {
   const pathname = usePathname();
   const { mode } = useViewMode();
-
-  const [suggestion, setSuggestion] = useState('');
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => setHasMounted(true), []);
+
   const titleMap: Record<string, string> = {
     '/': 'oLabs Assistant',
-    '/cx-edge': 'CX-Edge Assistant',
+    '/cxedge': 'CX-Edge Assistant',
     '/hatteras': 'Hatteras Assistant',
-    '/semantic-edge': 'Semantic-Edge Assistant',
+    '/semantic-edge': 'Semantic Edge Assistant',
     '/sentinel': 'Sentinel Assistant',
+    '/echonet': 'Echonet Assistant',
     '/mixed-reality': 'Mixed Reality Assistant',
   };
-
   const baseTitle = titleMap[pathname] || 'oLabs Assistant';
 
-  useEffect(() => {
-    const mapped = suggestionMap[pathname] || 'Hi! How can I help you explore oLabs?';
-    setSuggestion(mapped);
-
-    // If chatbot is open, update the input immediately with the latest suggestion
-    if (open) {
-      setInput(mapped);
-    }
-  }, [pathname, open]);
+  const filteredFaqs: FaqKey[] =
+    pathname === '/' ? generalFaqKeys : pageSpecificFaqMap[pathname] || [];
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -69,8 +57,8 @@ export default function Chatbot() {
     setMessages(newMessages);
     setInput('');
 
-    // 🔍 Check hardcoded answers first
-    const cannedReply = findAnswer(input, mode);
+    // Try canned reply
+    const cannedReply = findAnswer(input);
     if (cannedReply) {
       setTimeout(() => {
         setMessages((prev) => [...prev, { role: 'bot', text: cannedReply }]);
@@ -78,7 +66,6 @@ export default function Chatbot() {
       return;
     }
 
-    // Otherwise → send to OpenAI
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -110,15 +97,15 @@ export default function Chatbot() {
   const hasInitializedRef = useRef(false);
 
   useEffect(() => {
-    if (open && !hasInitializedRef.current) {
-      setInput(suggestion); // Pre-fill input
-      hasInitializedRef.current = true;
-    }
+    const suggested =
+      pathname === '/'
+        ? 'Hi! How can I help you explore oLabs?'
+        : findAnswer(filteredFaqs[0] || '') || '';
 
     if (open && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [open, suggestion]);
+  }, [open, pathname, filteredFaqs]);
 
   return (
     <AnimatePresence>
@@ -133,9 +120,9 @@ export default function Chatbot() {
         >
           <motion.button
             onClick={() => {
-              vibrate(15);
+              vibrate();
               setMessages([]);
-              setOpen(true); // This will trigger the suggestion effect
+              setOpen(true);
             }}
             aria-label="Open Chatbot"
             className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
@@ -164,17 +151,13 @@ export default function Chatbot() {
           className="fixed bottom-6 right-6 w-[90vw] max-w-sm bg-zinc-900 border-2 border-blue-600 rounded-xl shadow-xl flex flex-col overflow-hidden z-50"
         >
           <div className="flex justify-between items-center bg-zinc-800 px-4 py-2 border-b border-zinc-700">
-            <h2 className="font-semibold text-lg text-white">
-              {baseTitle}
-              {mode === 'advanced' && <span className="text-blue-400"> Deep Dive</span>}
-            </h2>
+            <h2 className="font-semibold text-lg text-white">{baseTitle}</h2>
 
             <button
               onClick={() => {
-                vibrate(15);
-                setMessages([]); // Clear any old history
-                setInput(suggestion); // Set new suggestion in the input field
-                setOpen(false); // Open chatbot
+                vibrate();
+                setMessages([]);
+                setOpen(false);
               }}
               aria-label="Close Chat"
             >
@@ -192,28 +175,102 @@ export default function Chatbot() {
                     : 'bg-blue-900 text-left mr-auto text-blue-100'
                 }`}
               >
-                {msg.text}
+                {msg.role === 'bot' ? (
+                  <ReactMarkdown
+                    components={{
+                      a: ({ node, ...props }) => (
+                        <a
+                          {...props}
+                          className="inline-flex items-center gap-1 text-blue-300 underline hover:text-white"
+                        >
+                          {props.children}
+                          <span aria-hidden>🔗</span>
+                        </a>
+                      ),
+                    }}
+                  >
+                    {msg.text}
+                  </ReactMarkdown>
+                ) : (
+                  msg.text
+                )}
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="flex border-t border-zinc-700 bg-zinc-800">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a message..."
-              className="flex-1 px-4 py-2 text-sm bg-transparent text-white placeholder:text-zinc-400 focus:outline-none"
-              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-            />
-            <button
-              onClick={sendMessage}
-              className="px-4 bg-blue-600 text-white hover:bg-blue-700 transition"
-              aria-label="Send Message"
-            >
-              <SendHorizonal size={20} />
-            </button>
+          <div className="border-t border-zinc-700 bg-zinc-800 p-2 space-y-2">
+            {hasMounted && filteredFaqs.length > 0 && (
+              <select
+                key={pathname}
+                onChange={(e) => {
+                  const selected = e.target.value as FaqKey;
+                  if (!selected) return;
+
+                  setMessages((prev) => [...prev, { role: 'user', text: selected }]);
+
+                  const cannedReply = findAnswer(selected);
+                  if (cannedReply) {
+                    setTimeout(() => {
+                      setMessages((prev) => [...prev, { role: 'bot', text: cannedReply }]);
+                    }, 300);
+                  } else {
+                    fetch('/api/chat', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        messages: [
+                          { role: 'system', content: 'You are oLabs Assistant...' },
+                          ...messages,
+                          { role: 'user', text: selected },
+                        ],
+                      }),
+                    })
+                      .then((res) => res.json())
+                      .then((data) => {
+                        setMessages((prev) => [...prev, { role: 'bot', text: data.text }]);
+                      })
+                      .catch(() => {
+                        setMessages((prev) => [
+                          ...prev,
+                          { role: 'bot', text: 'Sorry, something went wrong. Please try again.' },
+                        ]);
+                      });
+                  }
+
+                  e.target.selectedIndex = 0; // reset dropdown
+                }}
+                className="w-full bg-zinc-700 text-white text-sm p-2 rounded focus:outline-none"
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  🔍 Choose a frequently asked question...
+                </option>
+                {filteredFaqs.map((key) => (
+                  <option key={key} value={key}>
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            <div className="flex">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type a message..."
+                className="flex-1 px-4 py-2 text-sm bg-transparent text-white placeholder:text-zinc-400 focus:outline-none"
+                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+              />
+              <button
+                onClick={sendMessage}
+                className="px-4 bg-blue-600 text-white hover:bg-blue-700 transition"
+                aria-label="Send Message"
+              >
+                <SendHorizonal size={20} />
+              </button>
+            </div>
           </div>
         </motion.div>
       )}

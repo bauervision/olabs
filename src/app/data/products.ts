@@ -19,7 +19,7 @@ export const products = [
     href: '/hatteras',
   },
   {
-    title: 'Semantic-Edge',
+    title: 'Semantic Edge',
     slug: 'semantic-edge',
     description:
       'A generative AI solution for field operations, Semantic-Edge is small, fitting comfortably on a laptop and scalable to meet your mission requirements. Semantic-Edge provides users with the ability to search and analyze data, documents and manuals, APIs and more, allowing operators to gain full situational awareness and resolve issues on the fly and at the tactical edge.',
@@ -39,7 +39,8 @@ export const products = [
   {
     title: 'Echonet',
     slug: 'echonet',
-    description: 'A sound-based systems for locating targets in real time',
+    description:
+      'A sound-based systems for locating targets in real time with advanced acoustic sensing and improving threat identity confirmation and minimizing false positives',
     image: '/images/echonet.png',
     imagePosition: 'center 45%',
     href: '/echonet',
