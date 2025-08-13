@@ -21,7 +21,7 @@ export default function MixedRealityPage() {
         {mode === 'basic' && (
           <>
             <MaskedSection
-              topLeftAngle={40}
+              topLeftAngle={0}
               bottomLeftAngle={40}
               bgColor="bg-gradient-to-br from-zinc-900/60 via-zinc-400/30 to-zinc-700/80"
               contentPosition="center"
@@ -49,11 +49,79 @@ export default function MixedRealityPage() {
               />
             </MaskedSection>
 
-            {/* Cutting-edge situational awareness  */}
+            {/* Surge/Sonus  */}
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
               bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
+              contentPosition="center"
+            >
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
+                SONUS ( Sonic Targeting )
+              </h2>
+              <FeatureRow
+                image={
+                  <MaskedImage
+                    src="/images/SonusScreen.png"
+                    alt="Sonus Logo"
+                    zoom={1.2}
+                    positionX="60%"
+                    positionY="40%"
+                    width={420}
+                    shadow={true}
+                    // circle
+                  />
+                }
+                bodySegments={[
+                  'Here we present an application that allows the user to hear the location of targets identified on the battlefield',
+                  'It is recommended that you have stereo capable headphones so you can hear how the 3d sounds direct you to the target locations in the demo.',
+                  'Very similiar to our Echonet technology, but instead of determining where targets are located based on sound emitted from the target, SONUS emits a 3d sound based on a calculation of their geospatial location in relation to yours.',
+                  'This allows to listen to the targets and deduce where they are located, and thereby where you need to go to engage them.',
+                ]}
+                quoteText="SONUS"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">SONUS</h2>
+                    <p className="pb-4">
+                      This version of the app places you in an environment where you can experience
+                      the effectiveness of sonic targeting
+                    </p>
+                    <p className="pb-4"></p>
+                    <p className="pb-4">
+                      If the target has already been identified, SONUS will guide you right to it
+                    </p>
+
+                    <div className="flex flex-col items-center justify-center  gap-2 ">
+                      <div className="flex items-center ustify-center gap-2">
+                        {/* Mobile */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">📱</span>
+                          <span>Mobile</span>
+                        </div>
+                        <button
+                          onClick={() => window.open('https://sonus-targeting.web.app/', '_blank')}
+                          className="px-4 py-2 rounded bg-blue-800 hover:bg-blue-700 text-white border-blue-300 border-2"
+                        >
+                          Launch App
+                        </button>
+
+                        {/* Desktop */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">💻</span>
+                          <span>Desktop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </MaskedSection>
+
+            {/* Cutting-edge mission planning  */}
+            <MaskedSection
+              topLeftAngle={40}
+              bottomLeftAngle={40}
+              bgColor="bg-gradient-to-br from-zinc-700 via-zinc-900 to-zinc-700"
               contentPosition="center"
             >
               <h2 className="text-4xl font-bold text-blue-500 mb-6 animate-glitch">
@@ -61,78 +129,62 @@ export default function MixedRealityPage() {
               </h2>
 
               <FeatureRow
+                reverse
                 image={
                   <MaskedImage
-                    src="/images/mixed2.png"
+                    src="/images/nextgenterrain.png"
                     alt="Sentinel Drone"
-                    zoom={1.9}
-                    positionX="60%"
-                    positionY="62%"
-                    width={320}
-                    shadow={true}
-                    circle
-                  />
-                }
-                // quotePopupContent={
-                //   <div>
-                //     <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
-                //       Deployable Video Reconnaissance
-                //     </h2>
-                //     <p className="pb-4">
-                //       With its ability to operate across a range of sensor modalities—short and
-                //       long-wave infrared, red, green, blue (RGB) signals, and more—Sentinel’s
-                //       powerful computer vision algorithms convert multiple video data feeds from one
-                //       format to another.
-                //     </p>
-                //   </div>
-                // }
-                // quoteText="Deployable Video Reconnaissance"
-                bodySegments={['Cutting edge mission planning...']}
-              />
-            </MaskedSection>
-
-            {/* Interoperability across the tactical tech stack */}
-            <MaskedSection
-              topLeftAngle={40}
-              bottomLeftAngle={40}
-              bgColor="bg-gradient-to-br from-zinc-700 via-zinc-900 to-zinc-700"
-              contentPosition="center"
-            >
-              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
-                Tactical Tech Stack Interoperability
-              </h2>
-              <FeatureRow
-                image={
-                  <MaskedImage
-                    src="/images/tech stack.png"
-                    alt="Sentinel Drone"
-                    zoom={1.3}
-                    positionX="50%"
-                    positionY="40%"
+                    zoom={1.5}
+                    positionX="35%"
+                    positionY="42%"
                     width={320}
                     shadow={true}
                   />
                 }
-                bodySegments={[
-                  'Easily implemented into all of our Edge products, mixed reality can take applications to the next level of immersion',
-                ]}
                 quotePopupContent={
                   <div>
                     <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
-                      Containerized Edge Solution
+                      Next-Gen Terrain
                     </h2>
                     <p className="pb-4">
-                      Its ML models can be installed on virtually any small compute infrastructure,
-                      making it deployable on small, lightweight and low-power technologies carried
-                      by soldiers.
+                      This example, was designed as mission planner that allows the user to set
+                      mission location, time of day, and weather. You then can launch a 3d
+                      simulation environment with that data.{' '}
                     </p>
+
+                    <div className="flex flex-col items-center justify-center  gap-2 ">
+                      <div className="flex items-center ustify-center gap-2">
+                        {/* Mobile */}
+                        <div className="flex items-center gap-1 opacity-40 line-through">
+                          <span className="text-lg">📱</span>
+                          <span>Mobile</span>
+                        </div>
+                        <button
+                          onClick={() => window.open('https://next-gen-terrain.web.app/', '_blank')}
+                          className="px-4 py-2 rounded bg-blue-800 hover:bg-blue-700 text-white border-blue-300 border-2"
+                        >
+                          Launch App
+                        </button>
+
+                        {/* Desktop */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">💻</span>
+                          <span>Desktop</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 }
-                quoteText="Containerized Edge Solution"
+                quoteText="Next-Gen Terrain"
+                bodySegments={[
+                  'The Next-Gen Terrain example is to allow users to interactively create a VR training simulation with objectives from a web browser, save the data to the cloud, and have the end user launch the updated mission on their Oculus without the need to update anything.',
+                  'The app was started under a proposal effort, so it is still under construction, you can still explore alot of the initial functionality',
+                  'Note: this web app only works on desktop, no mobile version is available',
+                ]}
               />
             </MaskedSection>
 
-            {/* Transformational AI tools for warfighters */}
+            {/* web and oculus */}
             <MaskedSection
               topRightAngle={40}
               bottomRightAngle={40}
@@ -140,9 +192,208 @@ export default function MixedRealityPage() {
               contentPosition="center"
             >
               <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
-                Web and Mobile App Design
+                Immersive Mixed Reality Interactions
               </h2>
-              <FeatureRow reverse bodySegments={['Mixed Reality is compatible with ... ']} />
+              <FeatureRow
+                image={
+                  <MaskedImage
+                    src="/images/vrSoldier.png"
+                    alt="Sentinel Drone"
+                    zoom={1.2}
+                    positionX="55%"
+                    positionY="52%"
+                    width={320}
+                    shadow={true}
+                  />
+                }
+                bodySegments={[
+                  'The following example has both a web and Oculus version. Here we showcase an interactive app that allows the user to examine different equipment loads for a soldier and how the weight affects route decision of a mission',
+                ]}
+                quoteText="Route Planner"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Route Planner
+                    </h2>
+                    <p className="pb-4">
+                      In this app you can attach and remove various pieces of equipment and see how
+                      a specific route becomes more or less intense based on the weight the soldier
+                      must carry.
+                    </p>
+
+                    <div className="flex flex-col items-center justify-center  gap-2 ">
+                      <div className="flex items-center ustify-center gap-2">
+                        {/* Mobile */}
+                        <div className="flex items-center gap-1 opacity-40 line-through">
+                          <span className="text-lg">📱</span>
+                          <span>Mobile</span>
+                        </div>
+                        <button
+                          onClick={() => window.open('https://vr-soldier.web.app/', '_blank')}
+                          className="px-4 py-2 rounded bg-blue-800 hover:bg-blue-700 text-white border-blue-300 border-2"
+                        >
+                          Launch App
+                        </button>
+
+                        {/* Desktop */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">💻</span>
+                          <span>Desktop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </MaskedSection>
+
+            {/* Data viz */}
+            <MaskedSection
+              topLeftAngle={40}
+              bottomLeftAngle={40}
+              bgColor="bg-gradient-to-br from-blue-500/60 via-blue-400/30 to-zinc-900/80"
+              contentPosition="center"
+            >
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
+                Data Visualization
+              </h2>
+              <FeatureRow
+                reverse
+                image={
+                  <MaskedImage
+                    src="/images/dataviz2.png"
+                    alt="Sentinel Drone"
+                    zoom={1.2}
+                    positionX="45%"
+                    positionY="52%"
+                    width={320}
+                    shadow={true}
+                    circle
+                  />
+                }
+                bodySegments={[
+                  'The beauty of mixed reality technology is how diverse the applications can be, and how varied the end goal.',
+                  'We created a data visualization app for the Census Bureau which focused on displaying data output to enable scientists to refine the underlying algorithm.',
+                ]}
+                quoteText="Data Visualization"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Data Visualization
+                    </h2>
+                    <p className="pb-4">
+                      This app built in Unity, showcases about 3,000 points of data and how it
+                      changes over time
+                    </p>
+
+                    <div className="flex flex-col items-center justify-center  gap-2 ">
+                      <div className="flex items-center ustify-center gap-2">
+                        {/* Mobile */}
+                        <div className="flex items-center gap-1 opacity-40 line-through">
+                          <span className="text-lg">📱</span>
+                          <span>Mobile</span>
+                        </div>
+                        <button
+                          onClick={() => window.open('https://census-data.web.app/', '_blank')}
+                          className="px-4 py-2 rounded bg-blue-800 hover:bg-blue-700 text-white border-blue-300 border-2"
+                        >
+                          Launch App
+                        </button>
+
+                        {/* Desktop */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">💻</span>
+                          <span>Desktop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </MaskedSection>
+
+            {/* Mobile App  */}
+            <MaskedSection
+              topRightAngle={40}
+              bottomRightAngle={40}
+              bgColor="bg-gradient-to-br from-zinc-700 via-zinc-900 to-zinc-700"
+              contentPosition="center"
+            >
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">
+                Mobile App Design
+              </h2>
+              <FeatureRow
+                bodySegments={[
+                  'Sometimes the mission calls for mobile app design, this was an app we made for the Air Force that provided modern UX for leave request submission and approval.',
+                  'We do not wait until the end of a project to address how the user will use it.',
+                  'This example highlights how we produce live prototypes for the customer to use and provide feedback on from day one. ',
+                ]}
+                quoteText="Leave Web Mobile"
+                quotePopupContent={
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 text-cyan-500 animate-glitch">
+                      Leave Web Mobile
+                    </h2>
+                    <p className="pb-4">
+                      The version you will see was one of the final UX approval steps before we
+                      moved to live device testing.
+                    </p>
+                    <p className="pb-4">
+                      At oLabs we strive not just for mission excellence with our technology but
+                      also with UX because we understand that it does not matter how awesome tech
+                      is, if no one can use it, it is worthless
+                    </p>
+
+                    <div className="flex flex-col items-center justify-center  gap-2 ">
+                      <div className="flex items-center ustify-center gap-2">
+                        {/* Mobile */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">📱</span>
+                          <span>Mobile</span>
+                        </div>
+                        <button
+                          onClick={() => window.open('https://leaveweb.web.app/', '_blank')}
+                          className="px-4 py-2 rounded bg-blue-800 hover:bg-blue-700 text-white border-blue-300 border-2"
+                        >
+                          Launch App
+                        </button>
+
+                        {/* Desktop */}
+                        <div className="flex items-center gap-1 text-green-500">
+                          <span className="text-lg">💻</span>
+                          <span>Desktop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </MaskedSection>
+
+            {/* tech stack */}
+            <MaskedSection
+              topLeftAngle={40}
+              bottomLeftAngle={0}
+              bgColor="bg-zinc-900 "
+              contentPosition="center"
+            >
+              <h2 className="text-4xl font-bold text-blue-500 mb-4 animate-glitch">Tech Stack</h2>
+              <FeatureRow
+                image={
+                  <MaskedImage
+                    src="/images/mixedtech.png"
+                    alt="Sentinel Drone"
+                    zoom={1.05}
+                    positionX="50%"
+                    positionY="50%"
+                    width={320}
+                    shadow={true}
+                  />
+                }
+                bodySegments={[
+                  'While the tech stack for mixed reality is gaming based, we include the highest levels of security including deploying to GovCloud',
+                ]}
+              />
             </MaskedSection>
           </>
         )}
